@@ -1,0 +1,7 @@
+# /etc/conf.d/local.start
+
+# This is a good place to load any misc programs
+# on startup (use &>/dev/null to hide output)
+echo 1024 > /sys/block/sda/queue/nr_requests &>/dev/null
+/sbin/blockdev --setra 8192 /dev/sda &>/dev/null
+/usr/bin/ntpclient -s -h pool.ntp.org &>/dev/null

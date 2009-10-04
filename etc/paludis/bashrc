@@ -1,0 +1,43 @@
+ARCH_OPTIONS_SAFE="-mtune=generic -msse3"
+ARCH_OPTIONS_NORMAL="${ARCH_OPTIONS_SAFE} -minline-stringops-dynamically" 
+
+CFLAG_OPTIONS_SAFE="-O2 -pipe -fno-ident"
+CFLAG_OPTIONS_NORMAL="${CFLAG_OPTIONS_SAFE} -ftree-vectorize -fpredictive-commoning"
+CFLAG_OPTIONS_UNSAFE="${CFLAG_OPTIONS_NORMAL} -fivopts"
+
+LDFLAG_OPTIONS_SAFE="-Wl,-O1,--sort-common,--hash-style=gnu"
+LDFLAG_OPTIONS_NORMAL="${LDFLAG_OPTIONS_SAFE},-z,relro"
+LDFLAG_OPTIONS_UNSAFE="${LDFLAG_OPTIONS_NORMAL},--as-needed"
+
+LDFLAGS="${LDFLAG_UNSAFE_OPT}"
+CFLAGS="${ARCH_OPTIONS_NORMAL} ${CFLAG_OPTIONS_UNSAFE}"
+CXXFLAGS="${ARCH_OPTIONS_NORMAL} ${CFLAG_OPTIONS_UNSAFE}"
+
+CHOST="x86_64-pc-linux-gnu"
+
+PATH="/usr/lib/ccache/bin/:${PATH}"
+CCACHE_DIR="/var/tmp/ccache"
+CCACHE_UNIFY="1"
+
+case "${CATEGORY}/${PNV}" in
+    # glibc should be built with safe flags
+    'sys-libs/glibc'*)
+    	LDFLAGS="${LDFLAG_OPTIONS_NORMAL}"
+        CFLAGS="-mtune=generic ${CFLAG_OPTIONS_NORMAL}"
+        CXXFLAGS="-mtune=generic ${CFLAG_OPTIONS_NORMAL}"
+    ;;
+
+    # gcc should be built with safe flags
+    'sys-devel/gcc'*)
+        LDFLAGS="${LDFLAG_OPTIONS_NORMAL}"
+        CFLAGS="-mtune=generic ${CFLAG_OPTIONS_NORMAL}"
+        CXXFLAGS="-mtune=generic ${CFLAG_OPTIONS_NORMAL}"
+    ;;
+
+    # paludis some random bullshit
+    'sys-apps/paludis'*)
+        LDFLAGS=""
+        CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
+        CXXFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
+    ;;
+esac

@@ -1,0 +1,1 @@
+PALUDIS_OPTIONS="--dl-suggested discard --multitask --dl-reinstall-scm weekly --resume-command-template /root/paludis.resume"
