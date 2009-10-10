@@ -40,4 +40,8 @@ case "${CATEGORY}/${PNV}" in
         CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
         CXXFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
     ;;
+	# test
+	'sys-apps/coreutils'*)
+		CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
+	;;
 esac
