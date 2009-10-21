@@ -1,0 +1,3 @@
+#!/bin/sh
+bin=$(which ntpclient)
+${bin} -s -h pool.ntp.org &>/dev/null

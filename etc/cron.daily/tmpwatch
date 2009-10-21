@@ -1,0 +1,27 @@
+#!/bin/bash
+TMPWATCH=$(which tmpwatch)
+
+## System related
+TMP=/tmp
+
+## Paludis related
+PALUDIS_DIST=/srv/localhost/sys-apps/paludis/distfiles
+PAUDIS_LOG=/var/log/paludis
+PALUDIS_TMP=/var/tmp/paludis/build
+
+
+if [[ -d ${TMP}  ]]; then
+	${TMPWATCH} --atime 168h ${TMP}
+fi
+
+if [[ -d ${PALUDIS_TMP} ]]; then
+	${TMPWATCH} --atime 48h ${PALUDIS_TMP}
+fi
+
+if [[ -d ${PALUDIS_DIST} ]]; then
+	${TMPWATCH} --atime 80d ${PALUDIS_DIST}
+fi
+
+if [[ -d ${PALUDIS_LOG} ]]; then
+	${TMPWATH} --atime 90d ${PALUDIS_LOG}
+fi
