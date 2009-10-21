@@ -1,3 +1,4 @@
 set noautoindent
 set nowrap
-set ts=4 sw=4 noexpandtab
+set ts=4 sw=4
+set expandtab

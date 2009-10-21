@@ -1,3 +1,6 @@
+## /etc/paludis/bashrc
+# Optimize for 2nd generation x86-64 cpu's
+
 ARCH_OPTIONS_SAFE="-mtune=generic -msse3"
 ARCH_OPTIONS_NORMAL="${ARCH_OPTIONS_SAFE} -minline-stringops-dynamically" 
 
@@ -40,8 +43,8 @@ case "${CATEGORY}/${PNV}" in
         CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
         CXXFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
     ;;
-	# test
-	'sys-apps/coreutils'*)
-		CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
+    # coreutils - build with safe flags
+    'sys-apps/coreutils'*)
+        CFLAGS="-mtune=generic ${CFLAG_OPTIONS_SAFE}"
 	;;
 esac

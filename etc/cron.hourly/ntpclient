@@ -1,1 +1,0 @@
-/usr/bin/ntpclient -s -h pool.ntp.org &>/dev/null
